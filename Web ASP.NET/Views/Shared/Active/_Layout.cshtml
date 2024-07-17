@@ -1,0 +1,10 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<partial name="Active/Head"/>
+<body>
+    <partial name="Active/Header" />
+    <main id="main">@RenderBody()</main>
+    <partial name="Active/Footer" />
+    <partial name="Active/FooterInclude" />
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
