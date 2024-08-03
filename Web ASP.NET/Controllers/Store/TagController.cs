@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Web_ASP.NET.Data;
 using Web_ASP.NET.Models.Enteties.Store;
 
@@ -25,13 +26,14 @@ namespace Web_ASP.NET.Controllers.Store
         [ValidateAntiForgeryToken]
         public IActionResult Create(string title)
         {
-            Tag tag = new Tag();
+            Tag tag = new();
             tag.Title = title;
 
             _context.Add(tag);
             _context.SaveChangesAsync();
 
             ViewData["TagTitle"] = title;
+            /*Console.WriteLine($"\n{ViewData["TagTitle"]}");*/
             return View();
         }
     }

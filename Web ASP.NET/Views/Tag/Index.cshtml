@@ -1,8 +1,9 @@
-﻿<h1>Create tag for store</h1>
+﻿<h1>Create new tag: </h1>
 <div>
     <form asp-controller="Tag" asp-action="Create">
+        <!--method="post"-->
         <div>
-            <input type="text" placeholder="Enter your tag: " />
+            <input type="text" name="title" placeholder="Enter your tag: " />
         </div>
         <div>
             <input type="submit" placeholder="Submit" />
