@@ -5,6 +5,7 @@ namespace Web_ASP.NET.Models.Enteties.Store
 {
     public class Tag
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id { get; set; }
         [Required]

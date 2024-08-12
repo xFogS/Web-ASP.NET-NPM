@@ -12,8 +12,8 @@ using Web_ASP.NET.Data;
 namespace Web_ASP.NET.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240801192253_CreateStoreVendor")]
-    partial class CreateStoreVendor
+    [Migration("20240812174423_CreateModelsStore")]
+    partial class CreateModelsStore
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
