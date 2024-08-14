@@ -12,8 +12,8 @@ using Web_ASP.NET.Data;
 namespace Web_ASP.NET.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240729093726_CreateFriend")]
-    partial class CreateFriend
+    [Migration("20240814172428_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -251,6 +251,24 @@ namespace Web_ASP.NET.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Friends");
+                });
+
+            modelBuilder.Entity("Web_ASP.NET.Models.Enteties.Store.Vendor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Vendors");
                 });
 
             modelBuilder.Entity("Web_ASP.NET.Models.Enteties.Subscriber", b =>

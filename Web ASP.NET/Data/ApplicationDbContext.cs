@@ -13,8 +13,13 @@ namespace Web_ASP.NET.Data
         }
         public DbSet<Subscriber> Subscribers { get; set; }
         public DbSet<Friend> Friends { get; set; }
-        public DbSet<Tag> Tags { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        /*public DbSet<Tag> Tags { get; set; }
+        public DbSet<Category> Categories { get; set; }*/
         public DbSet<Vendor> Vendors { get; set; }
+
+        /*ONE TO MANY - MANY TO MANY*/
+        public DbSet<TagModel> Tags { get; set; }
+        public DbSet<CategoryModel> Categories { get; set; }
+        public DbSet<PostModel> Posts { get; set; }
     }
 }
