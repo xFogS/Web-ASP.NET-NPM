@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Web_ASP.NET.Models.Enteties;
 using Web_ASP.NET.Models.Enteties.Store;
@@ -21,5 +22,12 @@ namespace Web_ASP.NET.Data
         public DbSet<TagModel> Tags { get; set; }
         public DbSet<CategoryModel> Categories { get; set; }
         public DbSet<PostModel> Posts { get; set; }
+
+        /*ONE TO MANY - MANY TO MANY - ONE TO MANY | AREA DESCRIPTION*/
+        public DbSet<Area> Areas { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<CityType> CityTypes { get; set; }
+        public DbSet<Street> Streets { get; set; }
+
     }
 }
