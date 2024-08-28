@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Web_ASP.NET.Data;
 using Web_ASP.NET.Models.Enteties;
 
@@ -22,7 +23,7 @@ namespace Web_ASP.NET.Controllers
         // GET: CityTypes
         public async Task<IActionResult> Index()
         {                
-            return View(await _context.CityCityTypeLinks.ToListAsync());
+            return View(await _context.CityTypes.ToListAsync());
         }
 
         // GET: CityTypes/Details/5

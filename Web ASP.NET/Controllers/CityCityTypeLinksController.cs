@@ -49,8 +49,8 @@ namespace Web_ASP.NET.Controllers
         // GET: CityCityTypeLinks/Create
         public IActionResult Create()
         {
-            ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Id");
-            ViewData["CityTypeId"] = new SelectList(_context.CityTypes, "Id", "Id");
+            ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Name");
+            ViewData["CityTypeId"] = new SelectList(_context.CityTypes, "Id", "Name");
             return View();
         }
 
@@ -61,14 +61,14 @@ namespace Web_ASP.NET.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,CityId,CityTypeId")] CityCityTypeLink cityCityTypeLink)
         {
-            if (ModelState.IsValid)
-            {
+            /*if (ModelState.IsValid)
+            {*/
                 _context.Add(cityCityTypeLink);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Id", cityCityTypeLink.CityId);
-            ViewData["CityTypeId"] = new SelectList(_context.CityTypes, "Id", "Id", cityCityTypeLink.CityTypeId);
+                /*return */RedirectToAction(nameof(Index));
+           /* }*/
+            ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Name", cityCityTypeLink.CityId);
+            ViewData["CityTypeId"] = new SelectList(_context.CityTypes, "Id", "Name", cityCityTypeLink.CityTypeId);
             return View(cityCityTypeLink);
         }
 
@@ -85,8 +85,8 @@ namespace Web_ASP.NET.Controllers
             {
                 return NotFound();
             }
-            ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Id", cityCityTypeLink.CityId);
-            ViewData["CityTypeId"] = new SelectList(_context.CityTypes, "Id", "Id", cityCityTypeLink.CityTypeId);
+            ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Name", cityCityTypeLink.CityId);
+            ViewData["CityTypeId"] = new SelectList(_context.CityTypes, "Id", "Name", cityCityTypeLink.CityTypeId);
             return View(cityCityTypeLink);
         }
 
@@ -122,8 +122,8 @@ namespace Web_ASP.NET.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Id", cityCityTypeLink.CityId);
-            ViewData["CityTypeId"] = new SelectList(_context.CityTypes, "Id", "Id", cityCityTypeLink.CityTypeId);
+            ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Name", cityCityTypeLink.CityId);
+            ViewData["CityTypeId"] = new SelectList(_context.CityTypes, "Id", "Name", cityCityTypeLink.CityTypeId);
             return View(cityCityTypeLink);
         }
 
