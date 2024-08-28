@@ -12,7 +12,7 @@ using Web_ASP.NET.Data;
 namespace Web_ASP.NET.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240824192926_CreateAreaDescription")]
+    [Migration("20240828114245_CreateAreaDescription")]
     partial class CreateAreaDescription
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace Web_ASP.NET.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -291,9 +291,6 @@ namespace Web_ASP.NET.Data.Migrations
                     b.Property<int>("AreaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CityTypeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -302,12 +299,10 @@ namespace Web_ASP.NET.Data.Migrations
 
                     b.HasIndex("AreaId");
 
-                    b.HasIndex("CityTypeId");
-
                     b.ToTable("Cities");
                 });
 
-            modelBuilder.Entity("Web_ASP.NET.Models.Enteties.CityType", b =>
+            modelBuilder.Entity("Web_ASP.NET.Models.Enteties.CityCityTypeLink", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -318,13 +313,31 @@ namespace Web_ASP.NET.Data.Migrations
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CityTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("CityTypeId");
+
+                    b.ToTable("CityCityTypeLinks");
+                });
+
+            modelBuilder.Entity("Web_ASP.NET.Models.Enteties.CityType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.ToTable("CityTypes");
                 });
@@ -537,18 +550,10 @@ namespace Web_ASP.NET.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Web_ASP.NET.Models.Enteties.CityType", "CityType")
-                        .WithMany()
-                        .HasForeignKey("CityTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Area");
-
-                    b.Navigation("CityType");
                 });
 
-            modelBuilder.Entity("Web_ASP.NET.Models.Enteties.CityType", b =>
+            modelBuilder.Entity("Web_ASP.NET.Models.Enteties.CityCityTypeLink", b =>
                 {
                     b.HasOne("Web_ASP.NET.Models.Enteties.City", "City")
                         .WithMany()
@@ -556,7 +561,15 @@ namespace Web_ASP.NET.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Web_ASP.NET.Models.Enteties.CityType", "CityType")
+                        .WithMany()
+                        .HasForeignKey("CityTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("City");
+
+                    b.Navigation("CityType");
                 });
 
             modelBuilder.Entity("Web_ASP.NET.Models.Enteties.PostModel", b =>

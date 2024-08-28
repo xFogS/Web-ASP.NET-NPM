@@ -24,14 +24,26 @@ namespace Web_ASP.NET.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CityTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CityTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Cities",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AreaId = table.Column<int>(type: "int", nullable: false),
-                    CityTypeId = table.Column<int>(type: "int", nullable: false)
+                    AreaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,21 +57,27 @@ namespace Web_ASP.NET.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CityTypes",
+                name: "CityCityTypeLinks",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CityId = table.Column<int>(type: "int", nullable: false)
+                    CityId = table.Column<int>(type: "int", nullable: false),
+                    CityTypeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CityTypes", x => x.Id);
+                    table.PrimaryKey("PK_CityCityTypeLinks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CityTypes_Cities_CityId",
+                        name: "FK_CityCityTypeLinks_Cities_CityId",
                         column: x => x.CityId,
                         principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CityCityTypeLinks_CityTypes_CityTypeId",
+                        column: x => x.CityTypeId,
+                        principalTable: "CityTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -90,51 +108,38 @@ namespace Web_ASP.NET.Data.Migrations
                 column: "AreaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cities_CityTypeId",
-                table: "Cities",
-                column: "CityTypeId");
+                name: "IX_CityCityTypeLinks_CityId",
+                table: "CityCityTypeLinks",
+                column: "CityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CityTypes_CityId",
-                table: "CityTypes",
-                column: "CityId");
+                name: "IX_CityCityTypeLinks_CityTypeId",
+                table: "CityCityTypeLinks",
+                column: "CityTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Streets_CityId",
                 table: "Streets",
                 column: "CityId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Cities_CityTypes_CityTypeId",
-                table: "Cities",
-                column: "CityTypeId",
-                principalTable: "CityTypes",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.NoAction);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Cities_Areas_AreaId",
-                table: "Cities");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Cities_CityTypes_CityTypeId",
-                table: "Cities");
+            migrationBuilder.DropTable(
+                name: "CityCityTypeLinks");
 
             migrationBuilder.DropTable(
                 name: "Streets");
-
-            migrationBuilder.DropTable(
-                name: "Areas");
 
             migrationBuilder.DropTable(
                 name: "CityTypes");
 
             migrationBuilder.DropTable(
                 name: "Cities");
+
+            migrationBuilder.DropTable(
+                name: "Areas");
         }
     }
 }

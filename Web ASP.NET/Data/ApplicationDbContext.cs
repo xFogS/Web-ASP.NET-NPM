@@ -27,7 +27,7 @@ namespace Web_ASP.NET.Data
         public DbSet<Area> Areas { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<CityType> CityTypes { get; set; }
+        public DbSet<CityCityTypeLink> CityCityTypeLinks { get; set; }
         public DbSet<Street> Streets { get; set; }
-
     }
 }

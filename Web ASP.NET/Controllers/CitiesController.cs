@@ -22,7 +22,7 @@ namespace Web_ASP.NET.Controllers
         // GET: Cities
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Cities.Include(c => c.Area).Include(c => c.CityType);
+            var applicationDbContext = _context.Cities.Include(c => c.Area);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,7 +36,6 @@ namespace Web_ASP.NET.Controllers
 
             var city = await _context.Cities
                 .Include(c => c.Area)
-                .Include(c => c.CityType)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (city == null)
             {
@@ -50,7 +49,6 @@ namespace Web_ASP.NET.Controllers
         public IActionResult Create()
         {
             ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name");
-            ViewData["CityTypeId"] = new SelectList(_context.CityTypes, "Id", "Name");
             return View();
         }
 
@@ -59,16 +57,15 @@ namespace Web_ASP.NET.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,AreaId,CityTypeId")] City city)
+        public async Task<IActionResult> Create([Bind("Id,Name,AreaId")] City city)
         {
-            if (ModelState.IsValid)
-            {
+            /*if (ModelState.IsValid)
+            {*/
                 _context.Add(city);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+                RedirectToAction(nameof(Index));
+            //}
             ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", city.AreaId);
-            ViewData["CityTypeId"] = new SelectList(_context.CityTypes, "Id", "Name", city.CityTypeId);
             return View(city);
         }
 
@@ -86,7 +83,6 @@ namespace Web_ASP.NET.Controllers
                 return NotFound();
             }
             ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", city.AreaId);
-            ViewData["CityTypeId"] = new SelectList(_context.CityTypes, "Id", "Name", city.CityTypeId);
             return View(city);
         }
 
@@ -95,7 +91,7 @@ namespace Web_ASP.NET.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,AreaId,CityTypeId")] City city)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,AreaId")] City city)
         {
             if (id != city.Id)
             {
@@ -123,7 +119,6 @@ namespace Web_ASP.NET.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", city.AreaId);
-            ViewData["CityTypeId"] = new SelectList(_context.CityTypes, "Id", "Name", city.CityTypeId);
             return View(city);
         }
 
@@ -137,7 +132,6 @@ namespace Web_ASP.NET.Controllers
 
             var city = await _context.Cities
                 .Include(c => c.Area)
-                .Include(c => c.CityType)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (city == null)
             {

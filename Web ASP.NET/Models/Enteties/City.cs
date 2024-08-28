@@ -10,8 +10,6 @@ namespace Web_ASP.NET.Models.Enteties
         public int AreaId { get; set; }
         [ForeignKey("AreaId")]
         public Area Area { get; set; }
-        public int CityTypeId { get; set; }
-        [ForeignKey("CityTypeId")]
-        public CityType CityType { get; set; }
+        List<CityCityTypeLink> Links { get; set; }
     }
 }
