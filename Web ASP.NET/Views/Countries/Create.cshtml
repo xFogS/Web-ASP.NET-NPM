@@ -1,30 +1,28 @@
-﻿@model Web_ASP.NET.Models.Enteties.Area
+﻿@model Web_ASP.NET.Models.Enteties.Country
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Edit</h1>
+<h1>Create</h1>
 
-<h4>Area</h4>
+<h4>Country</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Country" class="control-label"></label>
-                <select asp-for="Country.Name" class="control-label" asp-items="ViewBag.Country"></select>
-                <span asp-validation-for="Country" class="text-danger"></span>
+                <label asp-for="CapitalId" class="control-label"></label>
+                <select asp-for="CapitalId" class ="form-control" asp-items="ViewBag.CapitalId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>

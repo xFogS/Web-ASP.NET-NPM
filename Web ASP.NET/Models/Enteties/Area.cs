@@ -7,7 +7,11 @@ namespace Web_ASP.NET.Models.Enteties
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        List<City> Cities { get; set; } = new();
+        public string? Name { get; set; } = null!;
+        List<City>? Cities { get; set; } = new();
+        public int? CountryId { get; set; }
+        [ForeignKey("CountryId")]
+        public Country? Country { get; set; }
+        List<AreaRegions>? AreaRegions { get; set; } = new();
     }
 }

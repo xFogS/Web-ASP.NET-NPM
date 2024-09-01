@@ -18,11 +18,12 @@ namespace Web_ASP.NET.Controllers
         {
             _context = context;
         }
-
         // GET: Areas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Areas.ToListAsync());
+            var applicationDbContext = _context.Areas
+                .Include(c => c.Country);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Areas/Details/5
@@ -34,6 +35,7 @@ namespace Web_ASP.NET.Controllers
             }
 
             var area = await _context.Areas
+                .Include(c => c.Country)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (area == null)
             {
@@ -46,6 +48,9 @@ namespace Web_ASP.NET.Controllers
         // GET: Areas/Create
         public IActionResult Create()
         {
+            /*var applicationDbContext = _context.Areas
+                .Include(c => c.Country);*/
+            ViewData["Country"] = new SelectList(_context.Countries, "Id", "Name");
             return View();
         }
 
@@ -54,7 +59,7 @@ namespace Web_ASP.NET.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Area area)
+        public async Task<IActionResult> Create([Bind("Id,Name,CountryId")] Area area)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +67,7 @@ namespace Web_ASP.NET.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["Country"] = new SelectList(_context.Countries, "Id", "Name", area.CountryId);
             return View(area);
         }
 
@@ -73,11 +79,13 @@ namespace Web_ASP.NET.Controllers
                 return NotFound();
             }
 
-            var area = await _context.Areas.FindAsync(id);
+            var area = await _context.Areas
+                .FindAsync(id);
             if (area == null)
             {
                 return NotFound();
             }
+            ViewData["Country"] = new SelectList(_context.Countries, "Id", "Name", area.CountryId);
             return View(area);
         }
 
@@ -86,7 +94,7 @@ namespace Web_ASP.NET.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Area area)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CountryId")] Area area)
         {
             if (id != area.Id)
             {
@@ -113,6 +121,7 @@ namespace Web_ASP.NET.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["Country"] = new SelectList(_context.Countries, "Id", "Name", area.CountryId);
             return View(area);
         }
 
@@ -125,6 +134,7 @@ namespace Web_ASP.NET.Controllers
             }
 
             var area = await _context.Areas
+                .Include(x => x.Country)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (area == null)
             {

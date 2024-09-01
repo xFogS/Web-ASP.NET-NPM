@@ -2,14 +2,15 @@
 
 namespace Web_ASP.NET.Models.Enteties
 {
-    public class City
+    public class AreaRegions
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string? Name { get; set; } = null!;
         public int? AreaId { get; set; }
         [ForeignKey("AreaId")]
         public Area? Area { get; set; }
-        List<CityCityTypeLink>? Links { get; set; }
+        public int? RegionId { get; set; }
+        [ForeignKey("RegionId")]
+        public Region? Region { get; set; }
     }
 }

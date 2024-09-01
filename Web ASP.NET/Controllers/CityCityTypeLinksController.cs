@@ -97,7 +97,7 @@ namespace Web_ASP.NET.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,CityId,CityTypeId")] CityCityTypeLink cityCityTypeLink)
         {
-            if (id != cityCityTypeLink.Id)
+            if (id != cityCityTypeLink.Id) 
             {
                 return NotFound();
             }

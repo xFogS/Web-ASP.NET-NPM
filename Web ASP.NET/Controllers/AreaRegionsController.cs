@@ -10,23 +10,23 @@ using Web_ASP.NET.Models.Enteties;
 
 namespace Web_ASP.NET.Controllers
 {
-    public class CitiesController : Controller
+    public class AreaRegionsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CitiesController(ApplicationDbContext context)
+        public AreaRegionsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Cities
+        // GET: AreaRegions
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Cities.Include(c => c.Area);
+            var applicationDbContext = _context.AreaRegions.Include(a => a.Area).Include(a => a.Region);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Cities/Details/5
+        // GET: AreaRegions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +34,45 @@ namespace Web_ASP.NET.Controllers
                 return NotFound();
             }
 
-            var city = await _context.Cities
-                .Include(c => c.Area)
+            var areaRegions = await _context.AreaRegions
+                .Include(a => a.Area)
+                .Include(a => a.Region)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (city == null)
+            if (areaRegions == null)
             {
                 return NotFound();
             }
 
-            return View(city);
+            return View(areaRegions);
         }
 
-        // GET: Cities/Create
+        // GET: AreaRegions/Create
         public IActionResult Create()
         {
             ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name");
+            ViewData["RegionId"] = new SelectList(_context.Regions, "Id", "Name");
             return View();
         }
 
-        // POST: Cities/Create
+        // POST: AreaRegions/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,AreaId")] City city)
+        public async Task<IActionResult> Create([Bind("Id,AreaId,RegionId")] AreaRegions areaRegions)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(city);
+                _context.Add(areaRegions);
                 await _context.SaveChangesAsync();
-                RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
             }
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", city.AreaId);
-            return View(city);
+            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", areaRegions.AreaId);
+            ViewData["RegionId"] = new SelectList(_context.Regions, "Id", "Name", areaRegions.RegionId);
+            return View(areaRegions);
         }
 
-        // GET: Cities/Edit/5
+        // GET: AreaRegions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +80,24 @@ namespace Web_ASP.NET.Controllers
                 return NotFound();
             }
 
-            var city = await _context.Cities.FindAsync(id);
-            if (city == null)
+            var areaRegions = await _context.AreaRegions.FindAsync(id);
+            if (areaRegions == null)
             {
                 return NotFound();
             }
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", city.AreaId);
-            return View(city);
+            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", areaRegions.AreaId);
+            ViewData["RegionId"] = new SelectList(_context.Regions, "Id", "Name", areaRegions.RegionId);
+            return View(areaRegions);
         }
 
-        // POST: Cities/Edit/5
+        // POST: AreaRegions/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,AreaId")] City city)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,AreaId,RegionId")] AreaRegions areaRegions)
         {
-            if (id != city.Id)
+            if (id != areaRegions.Id)
             {
                 return NotFound();
             }
@@ -102,12 +106,12 @@ namespace Web_ASP.NET.Controllers
             {
                 try
                 {
-                    _context.Update(city);
+                    _context.Update(areaRegions);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CityExists(city.Id))
+                    if (!AreaRegionsExists(areaRegions.Id))
                     {
                         return NotFound();
                     }
@@ -118,11 +122,12 @@ namespace Web_ASP.NET.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", city.AreaId);
-            return View(city);
+            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", areaRegions.AreaId);
+            ViewData["RegionId"] = new SelectList(_context.Regions, "Id", "Name", areaRegions.RegionId);
+            return View(areaRegions);
         }
 
-        // GET: Cities/Delete/5
+        // GET: AreaRegions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,35 +135,36 @@ namespace Web_ASP.NET.Controllers
                 return NotFound();
             }
 
-            var city = await _context.Cities
-                .Include(c => c.Area)
+            var areaRegions = await _context.AreaRegions
+                .Include(a => a.Area)
+                .Include(a => a.Region)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (city == null)
+            if (areaRegions == null)
             {
                 return NotFound();
             }
 
-            return View(city);
+            return View(areaRegions);
         }
 
-        // POST: Cities/Delete/5
+        // POST: AreaRegions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var city = await _context.Cities.FindAsync(id);
-            if (city != null)
+            var areaRegions = await _context.AreaRegions.FindAsync(id);
+            if (areaRegions != null)
             {
-                _context.Cities.Remove(city);
+                _context.AreaRegions.Remove(areaRegions);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CityExists(int id)
+        private bool AreaRegionsExists(int id)
         {
-            return _context.Cities.Any(e => e.Id == id);
+            return _context.AreaRegions.Any(e => e.Id == id);
         }
     }
 }

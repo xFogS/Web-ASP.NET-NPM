@@ -1,4 +1,4 @@
-﻿@model Web_ASP.NET.Models.Enteties.Area
+﻿@model Web_ASP.NET.Models.Enteties.AreaRegions
 
 @{
     ViewData["Title"] = "Create";
@@ -6,21 +6,19 @@
 
 <h1>Create</h1>
 
-<h4>Area</h4>
+<h4>AreaRegions</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="AreaId" class="control-label"></label>
+                <select asp-for="AreaId" class ="form-control" asp-items="ViewBag.AreaId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="CountryId" class="control-label"></label>
-                <select asp-for="CountryId" class="form-control" asp-items="ViewBag.Country"></select>
-                <span asp-validation-for="CountryId" class="text-danger"></span>
+                <label asp-for="RegionId" class="control-label"></label>
+                <select asp-for="RegionId" class ="form-control" asp-items="ViewBag.RegionId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
