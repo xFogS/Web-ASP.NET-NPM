@@ -66,7 +66,7 @@ namespace Web_ASP.NET.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CapitalId"] = new SelectList(_context.Cities, "Id", "Name", country.CapitalId);
+            ViewData["CapitalId"] = new SelectList(_context.Cities, "Id", "Name");
             return View(country);
         }
 
@@ -83,7 +83,7 @@ namespace Web_ASP.NET.Controllers
             {
                 return NotFound();
             }
-            ViewData["CapitalId"] = new SelectList(_context.Cities, "Id", "Name", country.CapitalId);
+            ViewData["CapitalId"] = new SelectList(_context.Cities, "Id", "Name");
             return View(country);
         }
 
@@ -119,7 +119,7 @@ namespace Web_ASP.NET.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CapitalId"] = new SelectList(_context.Cities, "Id", "Name", country.CapitalId);
+            ViewData["CapitalId"] = new SelectList(_context.Cities, "Id", "Name");
             return View(country);
         }
 

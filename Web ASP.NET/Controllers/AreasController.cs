@@ -67,7 +67,7 @@ namespace Web_ASP.NET.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Country"] = new SelectList(_context.Countries, "Id", "Name", area.CountryId);
+            ViewData["Country"] = new SelectList(_context.Countries, "Id", "Name");
             return View(area);
         }
 
@@ -85,7 +85,7 @@ namespace Web_ASP.NET.Controllers
             {
                 return NotFound();
             }
-            ViewData["Country"] = new SelectList(_context.Countries, "Id", "Name", area.CountryId);
+            ViewData["Country"] = new SelectList(_context.Countries, "Id", "Name");
             return View(area);
         }
 
@@ -121,7 +121,7 @@ namespace Web_ASP.NET.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Country"] = new SelectList(_context.Countries, "Id", "Name", area.CountryId);
+            ViewData["Country"] = new SelectList(_context.Countries, "Id", "Name");
             return View(area);
         }
 

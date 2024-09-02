@@ -67,8 +67,8 @@ namespace Web_ASP.NET.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", areaRegions.AreaId);
-            ViewData["RegionId"] = new SelectList(_context.Regions, "Id", "Name", areaRegions.RegionId);
+            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name");
+            ViewData["RegionId"] = new SelectList(_context.Regions, "Id", "Name");
             return View(areaRegions);
         }
 
@@ -85,8 +85,8 @@ namespace Web_ASP.NET.Controllers
             {
                 return NotFound();
             }
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", areaRegions.AreaId);
-            ViewData["RegionId"] = new SelectList(_context.Regions, "Id", "Name", areaRegions.RegionId);
+            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name");
+            ViewData["RegionId"] = new SelectList(_context.Regions, "Id", "Name");
             return View(areaRegions);
         }
 
@@ -122,8 +122,8 @@ namespace Web_ASP.NET.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", areaRegions.AreaId);
-            ViewData["RegionId"] = new SelectList(_context.Regions, "Id", "Name", areaRegions.RegionId);
+            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name");
+            ViewData["RegionId"] = new SelectList(_context.Regions, "Id", "Name");
             return View(areaRegions);
         }
 
