@@ -1,0 +1,40 @@
+﻿@model Web_GEO.Models.Cars_Tayota.ColorModel
+
+<h1>Delete</h1>
+
+<div>
+    <h4>DollyModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.URL)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Model.URL" height="300" width="300" alt="@Model.URL" />
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RGB)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RGB)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

@@ -27,6 +27,7 @@ namespace Web_GEO.Controllers.Cars_Tayota
                     await file.CopyToAsync(stream);
                     model.URL = $"{directoryOfFile}/{file.FileName}";
                 }
+                //append check isvalid
             }
             _context.Add(model);
             await _context.SaveChangesAsync();
@@ -38,8 +39,6 @@ namespace Web_GEO.Controllers.Cars_Tayota
             var model = await _context.ColorModels
                 .FindAsync(Id);
             if (model == null) { NotFound(); }
-
-            //ViewData["ModelId"] = new SelectList(_context.ColorModels, "Id", "Name", model.Id);
             return View(model);
         }
         [HttpPost]
@@ -55,15 +54,41 @@ namespace Web_GEO.Controllers.Cars_Tayota
             ViewData["ModelId"] = new SelectList(_context.ColorModels, "Id", "Name");
             return View(model);
         }
-        public async Task<IActionResult> Details(int? Id) 
+        public async Task<IActionResult> Details(int? Id)
         {
             if (Id == null) { NotFound(); }
             var model = await _context.ColorModels
                 .FirstAsync(x => x.Id == Id);
             if (model == null) { NotFound(); }
-            ViewData["modelOfTheCar"] = model;
+            //ViewData["modelOfTheCar"] = model;
             return View(model);
         }
-        public IActionResult Delete() { return View(); }
+        public async Task<IActionResult> Delete(int? Id)
+        {
+            if (Id == null) { NotFound(); }
+            var model = await _context.ColorModels
+                .FirstOrDefaultAsync(x => x.Id == Id);
+            if (model == null) { NotFound(); }
+            return View(model);
+        }
+        //get colors/delete/id
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfident(int Id)
+        {
+            var model = await _context.ColorModels
+                .FindAsync(Id);
+            if (model != null && ModelState.IsValid)
+            {
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", $"{model.URL}");
+                _context.ColorModels.Remove(model);
+                //delete file from model.url
+                if (System.IO.File.Exists("wwwroot" + filePath))
+                    System.IO.File.Delete("wwwroot" + filePath);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

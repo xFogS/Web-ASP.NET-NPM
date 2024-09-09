@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Web_GEO.Models.Cars_Tayota;
+using Web_GEO.Models.Dolly;
 
 namespace Web_GEO.Data
 {
@@ -10,6 +11,12 @@ namespace Web_GEO.Data
             : base(options)
         {
         }
-        public DbSet<ColorModel> ColorModels { get; set; }
+        //CAR
+        public DbSet<Models.Cars_Tayota.ColorModel> ColorModels { get; set; }
+        //Dolly
+        public DbSet<DollyModel> DollyModels { get; set; }
+        public DbSet<Web_GEO.Models.Dolly.ColorModel> DollyColorModels { get; set; }
+        public DbSet<StyleModel> StyleModels { get; set; }
+        public DbSet<ImageModel> ImageModels { get; set; }
     }
 }
