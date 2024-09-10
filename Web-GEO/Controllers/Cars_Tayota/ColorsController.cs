@@ -82,9 +82,9 @@ namespace Web_GEO.Controllers.Cars_Tayota
             {
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", $"{model.URL}");
                 _context.ColorModels.Remove(model);
-                //delete file from model.url
-                if (System.IO.File.Exists("wwwroot" + filePath))
-                    System.IO.File.Delete("wwwroot" + filePath);
+                //delete file from model.url - choice developer
+                /*if (System.IO.File.Exists("wwwroot" + filePath))
+                    System.IO.File.Delete("wwwroot" + filePath);*/
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

@@ -19,8 +19,8 @@
         {
             <tr>
                 <td>@Html.DisplayFor(i => item.Name)</td>
-                <td><img src="@item.URL" height="300" width="300" style="border-radius: 10px" alt="@item.Name" /></td>
-                <td>@Html.DisplayFor(i => item.RGB)</td>
+                <td><img src="@item.URL" height="25" width="25" style="border-radius: 10px" alt="@item.URL" /></td>
+                <td style ="background-color: @item.RGB">@Html.DisplayFor(i => item.RGB)</td>
                 <td>@Html.DisplayFor(i => item.Code)</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
