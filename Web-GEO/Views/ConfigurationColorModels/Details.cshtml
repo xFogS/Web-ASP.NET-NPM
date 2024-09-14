@@ -1,0 +1,37 @@
+﻿@model Web_GEO.Models.Cars.Tayota.ConfigurationColorModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ConfigurationColorModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ColorModel)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ColorModel!.Name)
+            <img src="@Model.ColorModel!.URL" width="20" height="20" alt="@Model.ColorModel!.URL" style="border-radius:10px; padding-left: 10px" />
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ConfigurationModel)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ConfigurationModel!.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CarImageUrl)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Model.CarImageUrl" height="200" width="200" alt="@Model.CarImageUrl" style="border-radius:10px" />
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

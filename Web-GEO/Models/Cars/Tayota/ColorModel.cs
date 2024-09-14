@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Web_GEO.Models.Cars_Tayota
+namespace Web_GEO.Models.Cars.Tayota
 {
     public class ColorModel
     {
@@ -11,5 +11,6 @@ namespace Web_GEO.Models.Cars_Tayota
         public string? URL { get; set; }
         public string RGB { get; set; } = null!;
         public string Code { get; set; } = null!;
+        public List<ConfigurationColorModel> ConfColor { get; set; } = new();
     }
 }

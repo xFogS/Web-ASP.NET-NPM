@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Web_GEO.Data;
 
@@ -11,9 +12,11 @@ using Web_GEO.Data;
 namespace Web_GEO.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240914125800_AddConfandModelToTayota")]
+    partial class AddConfandModelToTayota
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -248,7 +251,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ColorModels", (string)null);
+                    b.ToTable("ColorModels");
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Cars.Tayota.ConfigurationColorModel", b =>
@@ -274,7 +277,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasIndex("ConfigurationId");
 
-                    b.ToTable("ConfigurationColorModels", (string)null);
+                    b.ToTable("ConfigurationColorModels");
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Cars.Tayota.ConfigurationModel", b =>
@@ -296,7 +299,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasIndex("ModelId");
 
-                    b.ToTable("ConfigurationModels", (string)null);
+                    b.ToTable("ConfigurationModels");
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Cars.Tayota.TayotaModel", b =>
@@ -313,7 +316,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TayotaModels", (string)null);
+                    b.ToTable("TayotaModels");
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Dolly.ColorModel", b =>
@@ -329,7 +332,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DollyColorModels", (string)null);
+                    b.ToTable("DollyColorModels");
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Dolly.DollyModel", b =>
@@ -360,7 +363,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasIndex("StyleId");
 
-                    b.ToTable("DollyModels", (string)null);
+                    b.ToTable("DollyModels");
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Dolly.ImageModel", b =>
@@ -376,7 +379,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ImageModels", (string)null);
+                    b.ToTable("ImageModels");
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Dolly.StyleModel", b =>
@@ -392,7 +395,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StyleModels", (string)null);
+                    b.ToTable("StyleModels");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

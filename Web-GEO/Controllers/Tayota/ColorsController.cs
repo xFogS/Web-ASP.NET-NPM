@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Web_GEO.Data;
-using Web_GEO.Models.Cars_Tayota;
+using Web_GEO.Models.Cars.Tayota;
 
-namespace Web_GEO.Controllers.Cars_Tayota
+namespace Web_GEO.Controllers.Tayota
 {
     public class ColorsController : Controller
     {
