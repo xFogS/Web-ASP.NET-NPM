@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Web_GEO.Models.Dolly;
+using Web_GEO.Models.Store;
 
 namespace Web_GEO.Data
 {
@@ -21,5 +22,11 @@ namespace Web_GEO.Data
         public DbSet<Web_GEO.Models.Dolly.ColorModel> DollyColorModels { get; set; }
         public DbSet<StyleModel> StyleModels { get; set; }
         public DbSet<ImageModel> ImageModels { get; set; }
+        //Store
+        public DbSet<VendorModel> VendorModels { get; set; }
+        public DbSet<CategoryModel> CategoryModels { get; set; }
+        public DbSet<ProductModel> ProductModels { get; set; }
+        public DbSet<ActionModel> ActionModels { get; set; }
+
     }
 }
