@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using Web_GEO.Data;
 using Web_GEO.Models.Cars.Tayota;
+using Web_GEO.Models;
 
 namespace Web_GEO.Controllers.Tayota
 {
@@ -11,7 +13,33 @@ namespace Web_GEO.Controllers.Tayota
         private readonly ApplicationDbContext _context;
         public ColorsController(ApplicationDbContext context) { _context = context; }
 
-        public async Task<IActionResult> Index() { return View(await _context.ColorModels.ToListAsync()); }
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 2, string sortColumn = "Name", string sortDirection = "asc")
+        {
+            var query = _context.ColorModels.AsQueryable();
+            query = sortColumn switch
+            {
+                "Id" => sortDirection == "asc" ? query.OrderBy(c => c.Id) : query.OrderByDescending(c => c.Id),
+                "Name" => sortDirection == "asc" ? query.OrderBy(c => c.Name) : query.OrderByDescending(c => c.Name),
+                _ => sortDirection == "asc" ? query.OrderBy(c => c.Name) : query.OrderByDescending(c => c.Name),
+            };
+            var totalItems = await query.CountAsync();
+            var colors = await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+            ViewData["Paginate"] = new PaginateViewModel
+            {
+                // pagination
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalItems = totalItems,
+                // sort
+                SortColumn = sortColumn,
+                SortDirection = sortDirection,
+                Columns = new List<string>(["Id", "Name"])
+            };
+            return View(colors);
+        }
         public IActionResult Create() { return View(); }
         [HttpPost]
         [ValidateAntiForgeryToken]

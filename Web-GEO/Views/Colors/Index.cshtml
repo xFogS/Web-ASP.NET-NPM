@@ -31,3 +31,5 @@
         }
     </tbody>
 </table>
+@Html.Partial("_Pagination", (PaginateViewModel)ViewData["Paginate"])
+@Html.Partial("_OrderBy", (PaginateViewModel)ViewData["Paginate"])
