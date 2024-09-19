@@ -12,6 +12,10 @@ namespace Web_ASP.NET.Models.Enteties
         public int? CountryId { get; set; }
         [ForeignKey("CountryId")]
         public Country? Country { get; set; }
+        public int? RegionCapitalId { get; set; }
+
+        [ForeignKey("RegionCapitalId")]
+        public City? RegionCapital { get; set; }
         List<AreaRegions>? AreaRegions { get; set; } = new();
     }
 }

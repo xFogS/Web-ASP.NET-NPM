@@ -63,10 +63,11 @@ namespace Web_ASP.NET.Controllers
         {
             /*if (ModelState.IsValid)
             {*/
-                _context.Add(cityCityTypeLink);
-                await _context.SaveChangesAsync();
-                /*return */RedirectToAction(nameof(Index));
-           /* }*/
+            _context.Add(cityCityTypeLink);
+            await _context.SaveChangesAsync();
+            /*return */
+            RedirectToAction(nameof(Index));
+            /* }*/
             ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Name", cityCityTypeLink.CityId);
             ViewData["CityTypeId"] = new SelectList(_context.CityTypes, "Id", "Name", cityCityTypeLink.CityTypeId);
             return View(cityCityTypeLink);
@@ -97,7 +98,7 @@ namespace Web_ASP.NET.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,CityId,CityTypeId")] CityCityTypeLink cityCityTypeLink)
         {
-            if (id != cityCityTypeLink.Id) 
+            if (id != cityCityTypeLink.Id)
             {
                 return NotFound();
             }

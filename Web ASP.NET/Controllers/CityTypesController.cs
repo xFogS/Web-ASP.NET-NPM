@@ -22,7 +22,7 @@ namespace Web_ASP.NET.Controllers
 
         // GET: CityTypes
         public async Task<IActionResult> Index()
-        {                
+        {
             return View(await _context.CityTypes.ToListAsync());
         }
 
@@ -59,9 +59,9 @@ namespace Web_ASP.NET.Controllers
         {
             /*if (ModelState.IsValid)
             {*/
-                _context.Add(cityType);
-                await _context.SaveChangesAsync();
-                RedirectToAction(nameof(Index));
+            _context.Add(cityType);
+            await _context.SaveChangesAsync();
+            RedirectToAction(nameof(Index));
             /*}*/
             return View(cityType);
         }

@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\AreaOfCountry\" />
     <Folder Include="wwwroot\storage\cars\tayota\" />
     <Folder Include="wwwroot\storage\dolly\" />
   </ItemGroup>
