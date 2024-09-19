@@ -1,0 +1,101 @@
+﻿@model Web_Testing_etc.Models.Cars.ColorsPaginationViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index"
+                   asp-route-pageNumber="@Model.Pagination.PageNumber" style="color: black;"
+                   asp-route-sortColumn="@Model.NameSortParam"
+                   asp-route-sortDirection="@Model.CurrentSort">
+                    @Html.DisplayName("Name")
+                </a>
+            </th>
+            <th>
+                @Html.DisplayName("RBG")
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-pageNumber="@Model.Pagination.PageNumber" style="color: black;"
+                   asp-route-sortColumn="@Model.CodeSortParam"
+                   asp-route-sortDirection="@Model.CurrentSort">
+                    @Html.DisplayName("Code")
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Colors)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td style="background-color: @item.RGB; color: black;">
+                    @Html.DisplayFor(modelItem => item.RGB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="pagination-container">
+    <ul class="pagination">
+        <!-- Кнопка для попередньої сторінки -->
+        @if (Model.Pagination.HasPrevPage)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-action="Index"
+                   asp-route-sortDirection="@Model.CurrentSort"
+                   asp-route-pageNumber="@(Model.Pagination.PageNumber - 1)"
+                   asp-route-pageSize="@Model.Pagination.PageSize">Previous</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <span class="page-link">Previous</span>
+            </li>
+        }
+
+        <!-- Номер сторінки -->
+        <li class="page-item active">
+            <span class="page-link">@Model.Pagination.PageNumber</span>
+        </li>
+
+        <!-- Кнопка для наступної сторінки -->
+        @if (Model.Pagination.HasNextPage)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-action="Index"
+                   asp-route-sortOrder="@Model.CurrentSort"
+                   asp-route-pageNumber="@(Model.Pagination.PageNumber + 1)"
+                   asp-route-pageSize="@Model.Pagination.PageSize">Next</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <span class="page-link">Next</span>
+            </li>
+        }
+    </ul>
+</div>

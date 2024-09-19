@@ -34,7 +34,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasIndex("ProductsId");
 
-                    b.ToTable("ActionModelProductModel");
+                    b.ToTable("ActionModelProductModel", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -263,7 +263,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ColorModels");
+                    b.ToTable("ColorModels", (string)null);
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Cars.Tayota.ConfigurationColorModel", b =>
@@ -289,7 +289,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasIndex("ConfigurationId");
 
-                    b.ToTable("ConfigurationColorModels");
+                    b.ToTable("ConfigurationColorModels", (string)null);
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Cars.Tayota.ConfigurationModel", b =>
@@ -311,7 +311,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasIndex("ModelId");
 
-                    b.ToTable("ConfigurationModels");
+                    b.ToTable("ConfigurationModels", (string)null);
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Cars.Tayota.TayotaModel", b =>
@@ -328,7 +328,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TayotaModels");
+                    b.ToTable("TayotaModels", (string)null);
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Dolly.ColorModel", b =>
@@ -344,7 +344,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DollyColorModels");
+                    b.ToTable("DollyColorModels", (string)null);
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Dolly.DollyModel", b =>
@@ -375,7 +375,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasIndex("StyleId");
 
-                    b.ToTable("DollyModels");
+                    b.ToTable("DollyModels", (string)null);
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Dolly.ImageModel", b =>
@@ -391,7 +391,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ImageModels");
+                    b.ToTable("ImageModels", (string)null);
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Dolly.StyleModel", b =>
@@ -407,7 +407,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StyleModels");
+                    b.ToTable("StyleModels", (string)null);
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Store.ActionModel", b =>
@@ -430,7 +430,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ActionModels");
+                    b.ToTable("ActionModels", (string)null);
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Store.CategoryModel", b =>
@@ -447,7 +447,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CategoryModels");
+                    b.ToTable("CategoryModels", (string)null);
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Store.ProductModel", b =>
@@ -474,7 +474,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasIndex("VendorId");
 
-                    b.ToTable("ProductModels");
+                    b.ToTable("ProductModels", (string)null);
                 });
 
             modelBuilder.Entity("Web_GEO.Models.Store.VendorModel", b =>
@@ -491,7 +491,7 @@ namespace Web_GEO.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("VendorModels");
+                    b.ToTable("VendorModels", (string)null);
                 });
 
             modelBuilder.Entity("ActionModelProductModel", b =>
