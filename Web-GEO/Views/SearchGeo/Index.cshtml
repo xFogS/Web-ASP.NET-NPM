@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Web_GEO.Models.Cars.Tayota.ColorModel>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.Name)</th>
+            <th>@Html.DisplayNameFor(m => m.RGB)</th>
+            <th>@Html.DisplayNameFor(m => m.Code)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.RGB</td>
+                <td>@item.Code</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="SearchPage">Search</a>

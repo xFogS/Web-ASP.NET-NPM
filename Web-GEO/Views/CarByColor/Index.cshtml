@@ -1,0 +1,61 @@
+﻿<h1>Car By Color</h1>
+
+<form method="get" asp-action="Index">
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <select name="modelId" class="form-control" asp-items="@ViewBag.models"></select>
+            </div>
+        </div>
+
+        @if (ViewBag.configurations != null)
+        {
+            <div class="col-md-4">
+                <div class="form-group">
+                    <select name="configurationId" class="form-control" asp-items="@ViewBag.configurations"></select>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-4">
+                <div class="form-group">
+                    <span>Select configuration first</span>
+                </div>
+            </div>
+        }
+
+        @if (ViewBag.colors != null)
+        {
+            <div class="col-md-4">
+                <div class="form-group">
+                    <select name="colorId" class="form-control" asp-items="@ViewBag.colors"></select>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-4">
+                <div class="form-group">
+                    <span>Select color first</span>
+                </div>
+            </div>
+        }
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Submit" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@if (ViewBag.image != null)
+{
+    <img src="@ViewBag.image" width="200" height="200" alt="Car Image" />
+}
+else
+{
+    <p>No image available</p>
+}
