@@ -1,0 +1,23 @@
+{
+  "name": "express-app",
+  "version": "20.17.0",
+  "description": "ExpressApp",
+  "main": "server.js",
+  "author": "",
+  "devDependencies": {
+    "eslint": "^8.21.0"
+  },
+  "eslintConfig": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Web ASP.NET"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
