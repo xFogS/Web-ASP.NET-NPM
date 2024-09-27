@@ -8,24 +8,26 @@ using Microsoft.EntityFrameworkCore;
 using Web_ASP.NET.Data;
 using Web_ASP.NET.Models.Enteties;
 
-namespace Web_ASP.NET.Controllers
+namespace Web_ASP.NET.Controllers.AreaOfCountry
 {
-    public class RegionsController : Controller
+    public class CountriesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public RegionsController(ApplicationDbContext context)
+        public CountriesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Regions
+        // GET: Countries
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Regions.ToListAsync());
+            var applicationDbContext = _context.Countries
+                .Include(c => c.Capital);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Regions/Details/5
+        // GET: Countries/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +35,42 @@ namespace Web_ASP.NET.Controllers
                 return NotFound();
             }
 
-            var region = await _context.Regions
+            var country = await _context.Countries
+                .Include(c => c.Capital)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (region == null)
+            if (country == null)
             {
                 return NotFound();
             }
 
-            return View(region);
+            return View(country);
         }
 
-        // GET: Regions/Create
+        // GET: Countries/Create
         public IActionResult Create()
         {
+            ViewData["CapitalId"] = new SelectList(_context.Cities, "Id", "Name"); //Country of capital
             return View();
         }
 
-        // POST: Regions/Create
+        // POST: Countries/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Region region)
+        public async Task<IActionResult> Create([Bind("Id,Name,CapitalId")] Country country) //null
         {
             if (ModelState.IsValid)
             {
-                _context.Add(region);
+                _context.Add(country);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(region);
+            ViewData["CapitalId"] = new SelectList(_context.Cities, "Id", "Name");
+            return View(country);
         }
 
-        // GET: Regions/Edit/5
+        // GET: Countries/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +78,23 @@ namespace Web_ASP.NET.Controllers
                 return NotFound();
             }
 
-            var region = await _context.Regions.FindAsync(id);
-            if (region == null)
+            var country = await _context.Countries.FindAsync(id);
+            if (country == null)
             {
                 return NotFound();
             }
-            return View(region);
+            ViewData["CapitalId"] = new SelectList(_context.Cities, "Id", "Name");
+            return View(country);
         }
 
-        // POST: Regions/Edit/5
+        // POST: Countries/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Region region)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CapitalId")] Country country)
         {
-            if (id != region.Id)
+            if (id != country.Id)
             {
                 return NotFound();
             }
@@ -97,12 +103,12 @@ namespace Web_ASP.NET.Controllers
             {
                 try
                 {
-                    _context.Update(region);
+                    _context.Update(country);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RegionExists(region.Id))
+                    if (!CountryExists(country.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +119,11 @@ namespace Web_ASP.NET.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(region);
+            ViewData["CapitalId"] = new SelectList(_context.Cities, "Id", "Name");
+            return View(country);
         }
 
-        // GET: Regions/Delete/5
+        // GET: Countries/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +131,35 @@ namespace Web_ASP.NET.Controllers
                 return NotFound();
             }
 
-            var region = await _context.Regions
+            var country = await _context.Countries
+                .Include(c => c.Capital)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (region == null)
+            if (country == null)
             {
                 return NotFound();
             }
 
-            return View(region);
+            return View(country);
         }
 
-        // POST: Regions/Delete/5
+        // POST: Countries/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var region = await _context.Regions.FindAsync(id);
-            if (region != null)
+            var country = await _context.Countries.FindAsync(id);
+            if (country != null)
             {
-                _context.Regions.Remove(region);
+                _context.Countries.Remove(country);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RegionExists(int id)
+        private bool CountryExists(int id)
         {
-            return _context.Regions.Any(e => e.Id == id);
+            return _context.Countries.Any(e => e.Id == id);
         }
     }
 }

@@ -5,28 +5,28 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Web_ASP.NET.Data;
 using Web_ASP.NET.Models.Enteties;
 
-namespace Web_ASP.NET.Controllers
+namespace Web_ASP.NET.Controllers.AreaOfCountry
 {
-    public class StreetsController : Controller
+    public class CityTypesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public StreetsController(ApplicationDbContext context)
+        public CityTypesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Streets
+        // GET: CityTypes
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Streets.Include(s => s.City);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.CityTypes.ToListAsync());
         }
 
-        // GET: Streets/Details/5
+        // GET: CityTypes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +34,39 @@ namespace Web_ASP.NET.Controllers
                 return NotFound();
             }
 
-            var street = await _context.Streets
-                .Include(s => s.City)
+            var cityType = await _context.CityTypes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (street == null)
+            if (cityType == null)
             {
                 return NotFound();
             }
 
-            return View(street);
+            return View(cityType);
         }
 
-        // GET: Streets/Create
+        // GET: CityTypes/Create
         public IActionResult Create()
         {
-            ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Name");
             return View();
         }
 
-        // POST: Streets/Create
+        // POST: CityTypes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,CityId")] Street street)
+        public async Task<IActionResult> Create([Bind("Id,Name")] CityType cityType)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(street);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Name", street.CityId);
-            return View(street);
+            /*if (ModelState.IsValid)
+            {*/
+            _context.Add(cityType);
+            await _context.SaveChangesAsync();
+            RedirectToAction(nameof(Index));
+            /*}*/
+            return View(cityType);
         }
 
-        // GET: Streets/Edit/5
+        // GET: CityTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +74,22 @@ namespace Web_ASP.NET.Controllers
                 return NotFound();
             }
 
-            var street = await _context.Streets.FindAsync(id);
-            if (street == null)
+            var cityType = await _context.CityTypes.FindAsync(id);
+            if (cityType == null)
             {
                 return NotFound();
             }
-            ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Name", street.CityId);
-            return View(street);
+            return View(cityType);
         }
 
-        // POST: Streets/Edit/5
+        // POST: CityTypes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CityId")] Street street)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] CityType cityType)
         {
-            if (id != street.Id)
+            if (id != cityType.Id)
             {
                 return NotFound();
             }
@@ -102,12 +98,12 @@ namespace Web_ASP.NET.Controllers
             {
                 try
                 {
-                    _context.Update(street);
+                    _context.Update(cityType);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StreetExists(street.Id))
+                    if (!CityTypeExists(cityType.Id))
                     {
                         return NotFound();
                     }
@@ -118,11 +114,10 @@ namespace Web_ASP.NET.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityId"] = new SelectList(_context.Cities, "Id", "Name", street.CityId);
-            return View(street);
+            return View(cityType);
         }
 
-        // GET: Streets/Delete/5
+        // GET: CityTypes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,35 +125,34 @@ namespace Web_ASP.NET.Controllers
                 return NotFound();
             }
 
-            var street = await _context.Streets
-                .Include(s => s.City)
+            var cityType = await _context.CityTypes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (street == null)
+            if (cityType == null)
             {
                 return NotFound();
             }
 
-            return View(street);
+            return View(cityType);
         }
 
-        // POST: Streets/Delete/5
+        // POST: CityTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var street = await _context.Streets.FindAsync(id);
-            if (street != null)
+            var cityType = await _context.CityTypes.FindAsync(id);
+            if (cityType != null)
             {
-                _context.Streets.Remove(street);
+                _context.CityTypes.Remove(cityType);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StreetExists(int id)
+        private bool CityTypeExists(int id)
         {
-            return _context.Streets.Any(e => e.Id == id);
+            return _context.CityTypes.Any(e => e.Id == id);
         }
     }
 }

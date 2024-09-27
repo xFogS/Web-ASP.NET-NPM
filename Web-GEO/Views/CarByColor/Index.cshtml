@@ -2,10 +2,9 @@
 
 <form method="get" asp-action="Index">
     <div class="row">
-
         <div class="col-md-4">
             <div class="form-group">
-                <select name="modelId" class="form-control" asp-items="@ViewBag.models"></select>
+                <select name="modelId" id="modls" class="form-control" asp-items="@ViewBag.models"></select>
             </div>
         </div>
 
@@ -13,7 +12,7 @@
         {
             <div class="col-md-4">
                 <div class="form-group">
-                    <select name="configurationId" class="form-control" asp-items="@ViewBag.configurations"></select>
+                    <select name="configurationId" id="config" class="form-control" asp-items="@ViewBag.configurations"></select>
                 </div>
             </div>
         }
@@ -30,7 +29,7 @@
         {
             <div class="col-md-4">
                 <div class="form-group">
-                    <select name="colorId" class="form-control" asp-items="@ViewBag.colors"></select>
+                    <select name="colorId" id="color" class="form-control" asp-items="@ViewBag.colors"></select>
                 </div>
             </div>
         }

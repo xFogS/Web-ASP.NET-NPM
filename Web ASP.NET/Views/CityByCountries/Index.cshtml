@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Car by color";
+}
+
+<h1>City DB</h1>
+
+<form method="get" asp-action="Index" name="searchCity">
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <select asp-items="ViewBag.Countries" name="countryId"></select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                @if (ViewBag.Areas != null)
+                {
+                    <select asp-items="ViewBag.Areas" name="areaId"></select>
+                }
+                else
+                {
+                    <p>Select Country First</p>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                @if (ViewBag.Cities != null)
+                {
+                    <select asp-items="ViewBag.Cities" name="cityId"></select>
+                }
+                else
+                {
+                    <p>Select Area First</p>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="submit" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    let frm = document.forms["searchCity"];
+    frm.elements["countryId"].onchange = () => {
+        frm.elements["areaId"].value = null
+        frm.elements["cityId"].value = null
+        frm.submit()
+    }
+    frm.elements["areaId"].onchange = () => {
+        frm.elements["cityId"].value = null
+        frm.submit()
+    }
+</script>
+
+

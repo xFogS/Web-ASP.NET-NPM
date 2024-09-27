@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Web_ASP.NET.Data;
 using Web_ASP.NET.Models.Enteties;
 
-namespace Web_ASP.NET.Controllers
+namespace Web_ASP.NET.Controllers.AreaOfCountry
 {
     public class AreasController : Controller
     {

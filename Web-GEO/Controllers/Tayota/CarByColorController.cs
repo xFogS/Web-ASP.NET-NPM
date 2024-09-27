@@ -9,9 +9,9 @@ namespace Web_GEO.Controllers.Tayota
     {
         private readonly ApplicationDbContext _context;
         public CarByColorController(ApplicationDbContext context) { _context = context; }
-        public async Task<IActionResult> Index(int? modelId = null, int? configurationId = null, int? colorId = null)
+        public async Task<IActionResult> Index(int? modelId = 1, int? configurationId = null, int? colorId = null)
         {
-            if(modelId == null) { modelId = 1; configurationId = 1; colorId = 11; } //11 default white
+            //if(modelId == null) { modelId = 1; configurationId = 1; colorId = 11; } //11 default white
 
             ViewBag.models = new SelectList(await _context.TayotaModels.ToListAsync(), "Id", "Name", modelId);
             if (modelId != null)
@@ -28,7 +28,7 @@ namespace Web_GEO.Controllers.Tayota
                     .Include(c => c.ColorModel)
                     .Where(c => c.ConfigurationId == configurationId)
                     .ToListAsync();
-                ViewBag.colors = new SelectList(colors, "Id", "ColorModel.Name", colorId);
+                ViewBag.colors = new SelectList(colors, "ColorId", "ColorModel.Name", colorId);
             }
 
             if(colorId != null)
