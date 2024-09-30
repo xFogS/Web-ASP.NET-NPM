@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Web_ASP.NET.Models.Enteties
 {
@@ -11,6 +12,7 @@ namespace Web_ASP.NET.Models.Enteties
         List<City>? Cities { get; set; } = new();
         public int? CountryId { get; set; }
         [ForeignKey("CountryId")]
+        [JsonIgnore]
         public Country? Country { get; set; }
         public int? RegionCapitalId { get; set; }
 

@@ -1,0 +1,55 @@
+﻿<select id="countryId"></select>
+<select id="areaId"></select>
+<select id="cityId"></select>
+
+<script>
+    let country = document.getElementById("countryId");
+    let area = document.getElementById("areaId");
+    let city = document.getElementById("cityId");
+
+    function loadCountries() {
+        fetch("/api/ApiCountries/")
+            .then(res => res.json())
+            .then(data => {
+                country.innerHTML = '';
+                data.map(c => {
+                    let option = document.createElement("option");
+                    option.value = c.id;
+                    option.textContent = c.name;
+                    country.appendChild(option);
+                })
+            })
+            .catch(err => { console.error(err) })
+    }
+    loadCountries();
+
+    country.onclick = (ev) => {
+        
+        fetch(`/api/ApiAreas/${ev.target.value}`)
+            .then(res => res.json())
+            .then(data => {
+                area.innerText = '';
+                data.map(a => {
+                    let option = document.createElement("option");
+                    option.value = a.id;
+                    option.textContent = a.name;
+                    area.appendChild(option);
+                })
+            })
+            .catch(err => err.error())
+    }
+    area.onclick = (ev) => {
+        fetch(`/api/ApiCities/${ev.target.value}`)
+            .then(res => res.json())
+            .then(data => {
+                city.innerText = '';
+                data.map(a => {
+                    let option = document.createElement("option");
+                    option.value = a.id;
+                    option.textContent = a.name;
+                    city.appendChild(option);
+                })
+            })
+            .catch(err => err.error())
+    }
+</script>
