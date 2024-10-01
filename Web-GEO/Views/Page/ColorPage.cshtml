@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Color Page";
+}
+<div class="text-center">
+    <h1 class="display-4">Colors</h1>
+    <div>
+        <table>
+            <tbody id="tblColors">
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+
+    const tBody = document.getElementById('tblColors');
+    let data = [];
+    let paginate = {};
+
+    function buildTable() {
+
+        data.map(item => {
+            let tr = document.createElement('tr');
+
+            let tdName = document.createElement('td');
+            tdName.innerText = item.name
+            tr.appendChild(tdName)
+            let tdColorImg = document.createElement('td');
+            tdColorImg.innerHTML = '<img height="50" width="50" class="rounded-circle" src="' + item.url + '" />';
+            tr.appendChild(tdColorImg)
+            let tdColor = document.createElement('td');
+            tdColor.style.backgroundColor =  item.rgb;
+            tdColor.innerText = item.rgb;
+            tr.appendChild(tdColor)
+
+            let tdCode = document.createElement('td');
+            tdCode.innerText = item.code;
+            tr.appendChild(tdCode)
+
+            tBody.appendChild(tr)
+        })
+
+
+    }
+
+    fetch('/api/ApiColor')
+    .then(res => res.json())
+    .then(res => {
+        data = res.data;
+        paginate = res.paginate;
+        buildTable();
+    })
+    .catch(err => {
+        console.err(err)
+    })
+
+</script>

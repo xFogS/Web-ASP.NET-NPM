@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Web_GEO.Data;
 using Web_GEO.Models.Cars.Tayota;
-using Web_GEO.Models;
+using Web_GEO.Models.ViewModels;
 
 namespace Web_GEO.Controllers.Tayota
 {
