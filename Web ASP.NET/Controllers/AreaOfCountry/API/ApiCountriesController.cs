@@ -39,13 +39,13 @@ namespace Web_ASP.NET.Controllers.AreaOfCountry.API
                 return NotFound();
             }
 
-            return country;
+            return Ok(country);
         }
 
         // PUT: api/ApiCountry/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCountry(int id, Country country)
+        public async Task<IActionResult> PutCountry(int id, [FromForm]Country country)
         {
             if (id != country.Id)
             {
@@ -76,8 +76,10 @@ namespace Web_ASP.NET.Controllers.AreaOfCountry.API
         // POST: api/ApiCountry
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Country>> PostCountry(Country country)
+        public async Task<ActionResult<Country>> PostCountry([FromForm]Country country)
         {
+            if (country == null) {  return BadRequest(); }
+
             _context.Countries.Add(country);
             await _context.SaveChangesAsync();
 

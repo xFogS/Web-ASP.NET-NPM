@@ -61,12 +61,18 @@
   /**
    * Preloader
    */
-  const preloader = document.querySelector('#preloader');
+/*  const preloader = document.querySelector('#preloader');
   if (preloader) {
     window.addEventListener('load', () => {
       preloader.remove();
     });
-  }
+  }*/
+    const preloader = document.querySelector('#preloader');
+    if (preloader) {
+        window.addEventListener('load', () => {
+            preloader.style.display = 'none'; // Скрываем вместо удаления
+        });
+    }
 
   /**
    * Scroll top button

@@ -1,0 +1,39 @@
+﻿@model Web_ASP.NET.Models.Enteties.Country
+<h1>Create new Country</h1>
+
+<form asp-action="/api/ApiCountries" name="frmCreateCountry">
+    <div>
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" name="Name" type="text" id="item-name" />
+        </div>
+        <div class="form-group">
+            <label asp-for="CapitalId"></label>
+            <input asp-for="CapitalId" name="CapitalId" type="number" id="item-capitalId">
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Ok" class="btn btn-primary" />
+    </div>
+</form>
+
+<a asp-action="Index">Return back</a>
+
+<script>
+    document.forms.frmCreateCountry.onsubmit = (ev) => {
+        ev.preventDefault();
+        const form = new FormData(document.forms.frmCreateCountry);
+        fetch("/api/ApiCountries/", 
+        {
+            method: 'POST',
+            body: form
+        })
+            .then(res => {
+                if (!res.ok) throw new Error(console.log("response isn't ok"))
+                return res.json();
+            })
+            .then(data => { console.log(data) })
+            .catch(err => { console.error(err) })
+        // window.location.href = "/apipageofcountry/index";
+    }
+</script>

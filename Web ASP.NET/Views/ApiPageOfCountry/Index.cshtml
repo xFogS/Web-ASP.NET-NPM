@@ -1,0 +1,129 @@
+﻿<style>
+    .fixed-table {
+        width: 500px;
+        table-layout: fixed;
+    }
+
+        .fixed-table th, .fixed-table td {
+            width: 200px;
+            word-wrap: break-word;
+        }
+</style>
+<main id="main">
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Country</th>
+                <th>Area</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="countryIdTD">
+                    <select id="countryId"></select>
+                </td>
+                <td id="areaIdTD">
+                    <select id="areaId"></select>
+                </td>
+                <td id="cityIdTD">
+                    <select id="cityId"></select>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</main>
+
+<script>
+    let countryIdTD = document.getElementById("countryIdTD");
+    let countryId = document.getElementById("countryId");
+    let area = document.getElementById("areaId");
+    let city = document.getElementById("cityId");
+
+    let btnCreateCountry = document.createElement("button");
+    btnCreateCountry.innerHTML = "Create";
+
+    let btnPutCountry = document.createElement("button");
+    btnPutCountry.innerHTML = "Edit";
+
+    let btnDeleteCountry = document.createElement("button");
+    btnDeleteCountry.innerHTML = "Delete";
+
+    function loadCountries() {
+        fetch("/api/ApiCountries")
+            .then(res => res.json())
+            .then(data => {
+                countryId.innerHTML = '';
+                data.map(c => {
+                    let option = document.createElement("option");
+                    option.value = c.id;
+                    option.innerText = c.name;
+                    countryId.appendChild(option);
+                })
+            })
+            .catch(err => { console.error(err) })
+        countryIdTD.appendChild(btnCreateCountry);
+        countryIdTD.appendChild(btnPutCountry);
+        countryIdTD.appendChild(btnDeleteCountry);
+    }
+    loadCountries();
+
+
+
+    countryId.onclick = (ev) => {
+        btnPutCountry.value = ev.target.value;
+        btnDeleteCountry.value = ev.target.value;
+
+        fetch(`/api/ApiAreas/${ev.target.value}`)
+            .then(res => res.json())
+            .then(data => {
+                area.innerText = '';
+                data.map(a => {
+                    let option = document.createElement("option");
+                    option.value = a.id;
+                    option.innerText = a.name;
+                    area.appendChild(option);
+                })
+            })
+            .catch(err => err.error())
+    }
+
+    area.onclick = (ev) => {
+        fetch(`/api/ApiCities/${ev.target.value}`)
+            .then(res => res.json())
+            .then(data => {
+                city.innerText = '';
+                data.map(a => {
+                    let option = document.createElement("option");
+                    option.value = a.id;
+                    option.innerText = a.name;
+                    city.appendChild(option);
+                })
+            })
+            .catch(err => err.error())
+    }
+
+    btnCreateCountry.onclick = (ev) => {
+        window.location.href = "/apipageofcountry/create";
+    }
+
+    btnPutCountry.onclick = (ev) => {
+        const countryId = ev.target.value;
+        window.location.href = `/apipageofcountry/edit/${countryId}`;
+    }
+
+    btnDeleteCountry.onclick = (ev) => {
+        fetch(`/api/ApiCountries/${ev.target.value}`,
+            {
+                method: "Delete"
+            })
+            .then(res => {
+                if (!res.ok) throw new console.error("Error status")
+                loadCountries();
+                return res.json();
+            })
+            .catch(err => err.error())
+    }
+
+</script>
