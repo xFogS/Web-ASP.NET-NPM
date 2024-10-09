@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Node-NET", "Node-NET", "{FF
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "ExpressApp", "ExpressApp\ExpressApp.njsproj", "{0CB9BABB-F17B-494B-8759-CD5306BAC17F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthApp", "AuthApp\AuthApp.csproj", "{F216EE59-4392-4B28-A705-16500CE44589}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{0CB9BABB-F17B-494B-8759-CD5306BAC17F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CB9BABB-F17B-494B-8759-CD5306BAC17F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CB9BABB-F17B-494B-8759-CD5306BAC17F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F216EE59-4392-4B28-A705-16500CE44589}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F216EE59-4392-4B28-A705-16500CE44589}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F216EE59-4392-4B28-A705-16500CE44589}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F216EE59-4392-4B28-A705-16500CE44589}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
