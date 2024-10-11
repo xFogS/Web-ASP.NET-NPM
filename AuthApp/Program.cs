@@ -1,6 +1,8 @@
 using AuthApp.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Configuration;
 
 namespace AuthApp
 {
@@ -36,14 +38,16 @@ namespace AuthApp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
 
-            app.UseAuthorization();
+           app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.Map("/auth_user", [Authorize] () => "Auth success!");
+            app.Map("/no_auth_user", [Authorize] () => "Auth unsuccess!");
+
             app.MapRazorPages();
 
             app.Run();
