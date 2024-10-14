@@ -44,7 +44,7 @@ namespace AuthApp.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
 
             [Display(Name = "Profile Image")]
-            public IFormFile Image { get; set; } // Добавим поле для загрузки файла
+            public IFormFile Image { get; set; }
         }
 
         private async Task LoadAsync(AvatarUser user)
@@ -86,12 +86,9 @@ namespace AuthApp.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            // Обработка аватара
             if (Input.Image != null)
             {
-                var userId = int.Parse(_userManager.GetUserId(User)); // Преобразуем в int для работы с IUserAvatar
-
-                // Используем CreateAvatar для создания или EditAvatar для редактирования
+                var userId = int.Parse(_userManager.GetUserId(User));
                 var avatarUrl = _userAvatar.CreateAvatar(userId, Input.Image);
                 if (!string.IsNullOrEmpty(avatarUrl))
                 {

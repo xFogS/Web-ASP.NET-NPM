@@ -114,20 +114,20 @@ namespace AuthApp.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
-                // Обработка загрузки изображения
+
                 if (Input.Image != null && Input.Image.Length > 0)
                 {
-                    // Создаем уникальное имя файла для сохранения
+
                     var fileName = $"{Guid.NewGuid()}_{Input.Image.FileName}";
                     var filePath = Path.Combine("wwwroot/images", fileName);
 
-                    // Сохраняем файл на сервере
+
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await Input.Image.CopyToAsync(stream);
                     }
 
-                    // Устанавливаем URL аватара для пользователя
+
                     user.AvatarUrl = $"/images/{fileName}";
                 }
 
@@ -165,7 +165,6 @@ namespace AuthApp.Areas.Identity.Pages.Account
                 }
             }
 
-            // Если что-то пошло не так, возвращаем форму с ошибками
             return Page();
         }
 

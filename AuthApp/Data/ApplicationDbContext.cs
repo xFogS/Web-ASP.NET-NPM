@@ -10,6 +10,5 @@ namespace AuthApp.Data
             : base(options)
         {
         }
-        //public DbSet<AvatarUser> avatarUsers { get; set; }
     }
 }
