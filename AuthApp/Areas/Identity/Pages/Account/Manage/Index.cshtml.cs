@@ -6,6 +6,8 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using AuthApp.Models;
+using AuthApp.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,53 +16,38 @@ namespace AuthApp.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<AvatarUser> _userManager;
+        private readonly SignInManager<AvatarUser> _signInManager;
+        private readonly IUserAvatar<AvatarUser> _userAvatar;
 
         public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<AvatarUser> userManager,
+            SignInManager<AvatarUser> signInManager,
+            IUserAvatar<AvatarUser> userAvatar)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _userAvatar = userAvatar;
         }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public string Username { get; set; }
-
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         [TempData]
         public string StatusMessage { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "Profile Image")]
+            public IFormFile Image { get; set; } // Добавим поле для загрузки файла
         }
 
-        private async Task LoadAsync(IdentityUser user)
+        private async Task LoadAsync(AvatarUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
@@ -97,6 +84,20 @@ namespace AuthApp.Areas.Identity.Pages.Account.Manage
             {
                 await LoadAsync(user);
                 return Page();
+            }
+
+            // Обработка аватара
+            if (Input.Image != null)
+            {
+                var userId = int.Parse(_userManager.GetUserId(User)); // Преобразуем в int для работы с IUserAvatar
+
+                // Используем CreateAvatar для создания или EditAvatar для редактирования
+                var avatarUrl = _userAvatar.CreateAvatar(userId, Input.Image);
+                if (!string.IsNullOrEmpty(avatarUrl))
+                {
+                    user.AvatarUrl = avatarUrl;
+                    await _userManager.UpdateAsync(user);
+                }
             }
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);

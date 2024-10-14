@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Node-NET", "Node-NET", "{FF
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "ExpressApp", "ExpressApp\ExpressApp.njsproj", "{0CB9BABB-F17B-494B-8759-CD5306BAC17F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthApp", "AuthApp\AuthApp.csproj", "{F216EE59-4392-4B28-A705-16500CE44589}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthApp", "AuthApp\AuthApp.csproj", "{F216EE59-4392-4B28-A705-16500CE44589}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
