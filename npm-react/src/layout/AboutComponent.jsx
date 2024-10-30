@@ -14,7 +14,7 @@ function AboutComponent() {
                         </p>
                     </div>
                 </div>
-                <img className="img-fluid" src="assets/img/ipad.png" alt="..." />
+                <img className="img-fluid" src="../src/assets/img/ipad.png" alt="..." />
             </div>
         </section>
     )

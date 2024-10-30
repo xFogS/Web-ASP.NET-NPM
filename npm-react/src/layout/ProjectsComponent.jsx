@@ -5,7 +5,7 @@ function ProjectsComponent() {
             <div className="container px-4 px-lg-5">
                 {/*<!-- Featured Project Row-->*/}
                 <div className="row gx-0 mb-4 mb-lg-5 align-items-center">
-                    <div className="col-xl-8 col-lg-7"><img className="img-fluid mb-3 mb-lg-0" src="./assets/img/bg-masthead.jpg" alt="..." /></div>
+                    <div className="col-xl-8 col-lg-7"><img className="img-fluid mb-3 mb-lg-0" src="../src/assets/img/bg-masthead.jpg" alt="..." /></div>
                     <div className="col-xl-4 col-lg-5">
                         <div className="featured-text text-center text-lg-left">
                             <h4>Shoreline</h4>
@@ -15,7 +15,7 @@ function ProjectsComponent() {
                 </div>
                {/* <!-- Project One Row-->*/}
                 <div className="row gx-0 mb-5 mb-lg-0 justify-content-center">
-                    <div className="col-lg-6"><img className="img-fluid" src="./assets/img/demo-image-01.jpg" alt="..." /></div>
+                    <div className="col-lg-6"><img className="img-fluid" src="../src/assets/img/demo-image-01.jpg" alt="..." /></div>
                     <div className="col-lg-6">
                         <div className="bg-black text-center h-100 project">
                             <div className="d-flex h-100">
@@ -29,7 +29,7 @@ function ProjectsComponent() {
                 </div>
                 {/*<!-- Project Two Row-->*/}
                 <div className="row gx-0 justify-content-center">
-                    <div className="col-lg-6"><img className="img-fluid" src="./assets/img/demo-image-02.jpg" alt="..." /></div>
+                    <div className="col-lg-6"><img className="img-fluid" src="../src/assets/img/demo-image-02.jpg" alt="..." /></div>
                     <div className="col-lg-6 order-lg-first">
                         <div className="bg-black text-center h-100 project">
                             <div className="d-flex h-100">
