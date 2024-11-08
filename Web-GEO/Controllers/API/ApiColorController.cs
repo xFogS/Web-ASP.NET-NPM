@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -27,7 +28,7 @@ namespace Web_GEO.Controllers.API
         [HttpGet]
         public async Task<ActionResult<ApiPaginateResponse<ColorModel>>>
             GetColors(
-                int pageNumber = 1, int pageSize = 2,
+                int pageNumber = 1, int pageSize = 20,
                 string sortColumn = "Name", string sortDirection = "asc"
                 )
         {
